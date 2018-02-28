@@ -11,7 +11,8 @@
     "build": "webpack --mode production",
     "build_tests": "webpack --mode development --config webpack.tests.config.js",
     "watch": "webpack --mode development --watch",
-    "watch_tests": "webpack --mode development --watch --config webpack.tests.config.js"
+    "watch_tests": "webpack --mode development --watch --config webpack.tests.config.js",
+    "validate": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
@@ -31,11 +32,11 @@
   "homepage": "https://github.com/saltyrtc/saltyrtc-task-relayed-data-js#readme",
   "dependencies": {},
   "peerDependencies": {
-    "@saltyrtc/client": "^0.10.0",
+    "@saltyrtc/client": "^0.10.1",
     "tweetnacl": "^1.0.0"
   },
   "devDependencies": {
-    "@saltyrtc/client": "^0.10.0",
+    "@saltyrtc/client": "^0.10.1",
     "@types/jasmine": "^2.8.6",
     "jasmine": "^3.1.0",
     "msgpack-lite": "^0.1.26",

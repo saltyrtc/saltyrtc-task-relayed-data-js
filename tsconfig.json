@@ -12,7 +12,6 @@
         ],
         "removeComments": true,
         "noImplicitAny": true,
-        "skipLibCheck": true,
         "sourceMap": true
     },
     "exclude": [
