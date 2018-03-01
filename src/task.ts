@@ -45,7 +45,7 @@ export class RelayedDataTask implements saltyrtc.tasks.relayed_data.RelayedDataT
     /**
      * Initialize the task with the task data from the peer.
      *
-     * This method should only be called by the signalig class, not by the end user!
+     * This method should only be called by the signaling class, not by the end user!
      */
     init(signaling: saltyrtc.Signaling, data: Object): void {
         console.debug(this.logTag, "init");
