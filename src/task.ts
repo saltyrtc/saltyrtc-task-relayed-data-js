@@ -63,9 +63,7 @@ export class RelayedDataTask implements saltyrtc.tasks.relayed_data.RelayedDataT
     }
 
     /**
-     * Send a message through the secure WebSocket connection.
-     *
-     * The message will be end-to-end encrypted.
+     * Send an end-to-end encrypted message through the WebSocket.
      */
     public sendMessage(data: any): void {
         this.signaling.sendTaskMessage({
@@ -167,8 +165,8 @@ export class RelayedDataTask implements saltyrtc.tasks.relayed_data.RelayedDataT
     /**
      * Attach an event handler to the specified event(s).
      *
-     * Note: The same event handler object be registered twice. It will only
-     * run once.
+     * Note: The same event handler object cannot be registered multiple
+     * times. It will only run once.
      */
     public on(event: string | string[], handler: saltyrtc.SaltyRTCEventHandler): void {
         this.eventRegistry.register(event, handler);

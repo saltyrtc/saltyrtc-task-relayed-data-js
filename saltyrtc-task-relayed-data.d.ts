@@ -6,5 +6,44 @@
  */
 
 declare namespace saltyrtc.tasks.relayed_data {
-    interface RelayedDataTask extends saltyrtc.Task { }
+
+    interface RelayedDataTask extends saltyrtc.Task {
+
+        /**
+         * Send an end-to-end encrypted message through the WebSocket.
+         */
+        sendMessage(data: any): void;
+
+        /**
+         * Enable or disable debug logs.
+         */
+        setDebug(enabled: boolean): void;
+
+        /**
+         * Attach an event handler to the specified event(s).
+         *
+         * Note: The same event handler object cannot be registered multiple
+         * times. It will only run once.
+         */
+        on(event: string | string[], handler: saltyrtc.SaltyRTCEventHandler): void;
+
+        /**
+         * Attach a one-time event handler to the specified event(s).
+         *
+         * Note: If the same handler was already registered previously as a
+         * regular event handler, it will be completely removed after running
+         * once.
+         */
+        once(event: string | string[], handler: saltyrtc.SaltyRTCEventHandler): void;
+
+        /**
+         * Remove an event handler from the specified event(s).
+         *
+         * If no handler is specified, remove all handlers for the specified
+         * event(s).
+         */
+        off(event: string | string[], handler?: saltyrtc.SaltyRTCEventHandler): void;
+
+    }
+
 }
