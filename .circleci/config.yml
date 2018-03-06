@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: quay.io/saltyrtc/circleci-image-js:latest
+      - image: saltyrtc/circleci-image-js:latest
         environment:
           FIREFOX_BIN: xvfb-firefox
     steps:
