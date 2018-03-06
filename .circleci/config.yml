@@ -41,14 +41,6 @@ references:
     - run: kill -INT $(cat /saltyrtc/server.pid)
 
 jobs:
-  test-firefox-50.1.0:
-    docker:
-      - image: saltyrtc/circleci-image-js:firefox-50.1.0
-        environment:
-          FIREFOX_BIN: xvfb-firefox
-    steps: *test-steps
-    environment:
-      - BROWSER: Firefox_circle_ci
   test-firefox-52.6.0esr:
     docker:
       - image: saltyrtc/circleci-image-js:firefox-52.6.0esr
@@ -76,7 +68,6 @@ workflows:
   version: 2
   build:
     jobs:
-      - test-firefox-50.1.0
       - test-firefox-52.6.0esr
       - test-firefox-58.0.2
       - test-chromium-latest
