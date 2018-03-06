@@ -10,8 +10,8 @@
     "build": "webpack --mode development --config webpack.dev.js",
     "build_tests": "webpack --mode development --config webpack.tests.js",
     "dist": "webpack --mode production --config webpack.prod.js",
-    "watch": "webpack --mode development --watch",
-    "watch_tests": "webpack --mode development --watch --config webpack.tests.config.js",
+    "watch": "webpack --mode development --watch --config webpack.dev.js",
+    "watch_tests": "webpack --mode development --watch --config webpack.tests.js",
     "validate": "tsc --noEmit"
   },
   "repository": {
