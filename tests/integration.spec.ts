@@ -82,6 +82,46 @@ export default () => { describe('Integration Tests', function() {
             done();
         });
 
+        spec = it('exchange data', async (done) => {
+            console.info('===> TEST NAME:', spec.getFullName());
+            expect(this.initiator.state).toEqual('new');
+            expect(this.responder.state).toEqual('new');
+
+            await this.connectBoth(this.initiator, this.responder);
+
+            expect(this.initiator.state).toBe('task');
+            expect(this.responder.state).toBe('task');
+
+            const initiatorTask: RelayedDataTask = this.initiator.getTask();
+            const responderTask: RelayedDataTask = this.responder.getTask();
+
+            const exchangedData = new Promise((resolve) => {
+                // When the responder receives a message, reply with another message.
+                responderTask.on('data', (ev: saltyrtc.SaltyRTCEvent) => {
+                    expect(ev.data).toEqual('initiator->responder');
+                    responderTask.sendMessage({
+                        'hello': 123,
+                        'answer': 'responder->initiator',
+                    });
+                });
+
+                // When the initiator receives a message, validate and resolve.
+                initiatorTask.on('data', (ev: saltyrtc.SaltyRTCEvent) => {
+                    expect(ev.data).toEqual({
+                        'hello': 123,
+                        'answer': 'responder->initiator',
+                    });
+                    resolve();
+                });
+
+                // Trigger sending
+                initiatorTask.sendMessage('initiator->responder');
+            });
+
+            await exchangedData;
+            done();
+        });
+
     });
 
 }); }

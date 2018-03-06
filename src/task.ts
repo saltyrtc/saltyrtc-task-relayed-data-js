@@ -15,10 +15,10 @@ export class RelayedDataTask implements saltyrtc.tasks.relayed_data.RelayedDataT
     // Constants as defined by the specification
     private static PROTOCOL_NAME = 'v0.relayed_data.tasks.saltyrtc.org';
 
-    // Data fields
+    // Constants
     private static TYPE_DATA = 'data';
-    private static KEY_TYPE = 'type';
     private static KEY_PAYLOAD = 'p';
+    private static EVENT_DATA = 'data';
 
     // Initialization state
     private initialized = false;
@@ -40,7 +40,21 @@ export class RelayedDataTask implements saltyrtc.tasks.relayed_data.RelayedDataT
     /**
      * Create a new task instance.
      */
-    constructor() { }
+    constructor() {
+        console.debug(this.logTag, "Created new instance");
+    }
+
+    /**
+     * Send a message through the secure WebSocket connection.
+     *
+     * The message will be end-to-end encrypted.
+     */
+    public sendMessage(data: any): void {
+        this.signaling.sendTaskMessage({
+            type: RelayedDataTask.TYPE_DATA,
+            p: data,
+        });
+    }
 
     /**
      * Initialize the task with the task data from the peer.
@@ -56,7 +70,7 @@ export class RelayedDataTask implements saltyrtc.tasks.relayed_data.RelayedDataT
     /**
      * Used by the signaling class to notify task that the peer handshake is over.
      *
-     * This method should only be called by the signalig class, not by the end user!
+     * This method should only be called by the signaling class, not by the end user!
      */
     onPeerHandshakeDone(): void {
         console.debug(this.logTag, "onPeerHandshakeDone");
@@ -65,10 +79,18 @@ export class RelayedDataTask implements saltyrtc.tasks.relayed_data.RelayedDataT
     /**
      * Handle incoming task messages.
      *
-     * This method should only be called by the signalig class, not by the end user!
+     * This method should only be called by the signaling class, not by the end user!
      */
     onTaskMessage(message: saltyrtc.messages.TaskMessage): void {
         console.debug(this.logTag, 'New task message arrived: ' + message.type);
+        switch (message.type) {
+            case RelayedDataTask.TYPE_DATA:
+                if (this.validateData(message) !== true) return;
+                this.emit({type: RelayedDataTask.EVENT_DATA, data: message[RelayedDataTask.KEY_PAYLOAD]});
+                break;
+            default:
+                console.error(this.logTag, 'Received message with invalid type:', message.type);
+        }
     }
 
     /**
@@ -96,7 +118,7 @@ export class RelayedDataTask implements saltyrtc.tasks.relayed_data.RelayedDataT
     /**
      * Return the list of supported message types.
      *
-     * This method should only be called by the signalig class, not by the end user!
+     * This method should only be called by the signaling class, not by the end user!
      */
     getSupportedMessageTypes(): string[] {
         return [RelayedDataTask.TYPE_DATA];
@@ -105,7 +127,7 @@ export class RelayedDataTask implements saltyrtc.tasks.relayed_data.RelayedDataT
     /**
      * Return the task data used for negotiation in the `auth` message.
      *
-     * This method should only be called by the signalig class, not by the end user!
+     * This method should only be called by the signaling class, not by the end user!
      */
     getData(): object {
         return {};
@@ -185,6 +207,17 @@ export class RelayedDataTask implements saltyrtc.tasks.relayed_data.RelayedDataT
         if (response === false) {
             this.eventRegistry.unregister(event.type, handler);
         }
+    }
+
+    /**
+     * Validate data messages.
+     */
+    private validateData(message: saltyrtc.messages.TaskMessage): boolean {
+        if (message[RelayedDataTask.KEY_PAYLOAD] === undefined) {
+            console.warn(this.logTag, 'Data message does not contain payload');
+            return false;
+        }
+        return true;
     }
 
 }

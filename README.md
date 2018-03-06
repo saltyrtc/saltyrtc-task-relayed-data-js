@@ -21,6 +21,30 @@ You can install this library (and its peer dependencies) via `npm`:
     npm install --save @saltyrtc/task-relayed-data @saltyrtc/client tweetnacl msgpack-lite
 
 
+## Usage
+
+Create a new task instance:
+
+    const task = new RelayedDataTask();
+
+Once the connection is established (when the `SaltyRTC` instance raises the
+`state-change:task` event), you can send messages using the `sendMessage` method:
+
+    task.sendMessage("hello");
+    task.sendMessage({"type": "custom", "value": "You can also send objects"});
+
+When a new message arrives from the peer, an event is emitted. You can register
+and deregister event handlers with the `on`, `once` and `off` methods:
+
+    task.on('data', (ev) => {
+        console.log('New data message arrived:', ev.data);
+    });
+
+The following events are available:
+
+* `data`: A new message from the peer was received.
+
+
 ## Security
 
 ### Responsible Disclosure / Reporting Security Issues
