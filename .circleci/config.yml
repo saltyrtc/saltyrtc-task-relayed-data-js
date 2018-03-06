@@ -19,7 +19,8 @@ references:
         key: v1-dependencies-{{ checksum "package.json" }}
 
     # Start SaltyRTC server
-    - run: saltyrtc-server-launcher > /saltyrtc/server.pid && sleep 2
+    # Commented out, use server.saltyrtc.org for now
+    #- run: saltyrtc-server-launcher > /saltyrtc/server.pid && sleep 2
 
     # Show browser version
     - run: if which firefox >/dev/null; then firefox --version; fi
@@ -38,7 +39,8 @@ references:
         command: npm run lint
 
     # Stop SaltyRTC server
-    - run: kill -INT $(cat /saltyrtc/server.pid)
+    # Commented out, use server.saltyrtc.org for now
+    #- run: kill -INT $(cat /saltyrtc/server.pid)
 
 jobs:
   test-firefox-52.6.0esr:
