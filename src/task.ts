@@ -12,13 +12,14 @@
  */
 export class RelayedDataTask implements saltyrtc.tasks.relayed_data.RelayedDataTask {
 
-    // Constants as defined by the specification
-    private static PROTOCOL_NAME = 'v0.relayed_data.tasks.saltyrtc.org';
-
     // Constants
+    private static PROTOCOL_NAME = 'v0.relayed_data.tasks.saltyrtc.org';
     private static TYPE_DATA = 'data';
     private static KEY_PAYLOAD = 'p';
     private static EVENT_DATA = 'data';
+
+    // Debugging enabled?
+    private debugging = false;
 
     // Initialization state
     private initialized = false;
@@ -38,10 +39,27 @@ export class RelayedDataTask implements saltyrtc.tasks.relayed_data.RelayedDataT
     }
 
     /**
+     * Enable or disable debug logs.
+     */
+    public setDebug(enabled: boolean): void {
+        this.debugging = enabled;
+    }
+
+    /**
+     * Log to console.debug if debug mode is enabled.
+     */
+    private debug(...args: any[]) {
+        if (this.debugging) {
+            // tslint:disable:no-console
+            console.debug(this.logTag, ...args);
+        }
+    }
+
+    /**
      * Create a new task instance.
      */
-    constructor() {
-        console.debug(this.logTag, "Created new instance");
+    constructor(debug: boolean = false) {
+        this.debugging = debug;
     }
 
     /**
@@ -62,7 +80,7 @@ export class RelayedDataTask implements saltyrtc.tasks.relayed_data.RelayedDataT
      * This method should only be called by the signaling class, not by the end user!
      */
     init(signaling: saltyrtc.Signaling, data: Object): void {
-        console.debug(this.logTag, "init");
+        this.debug('init');
         this.signaling = signaling;
         this.initialized = true;
     }
@@ -73,7 +91,7 @@ export class RelayedDataTask implements saltyrtc.tasks.relayed_data.RelayedDataT
      * This method should only be called by the signaling class, not by the end user!
      */
     onPeerHandshakeDone(): void {
-        console.debug(this.logTag, "onPeerHandshakeDone");
+        this.debug('onPeerHandshakeDone');
     }
 
     /**
@@ -82,7 +100,7 @@ export class RelayedDataTask implements saltyrtc.tasks.relayed_data.RelayedDataT
      * This method should only be called by the signaling class, not by the end user!
      */
     onTaskMessage(message: saltyrtc.messages.TaskMessage): void {
-        console.debug(this.logTag, 'New task message arrived: ' + message.type);
+        this.debug('New task message arrived: ' + message.type);
         switch (message.type) {
             case RelayedDataTask.TYPE_DATA:
                 if (this.validateData(message) !== true) return;
@@ -141,7 +159,7 @@ export class RelayedDataTask implements saltyrtc.tasks.relayed_data.RelayedDataT
      * @param reason The close code.
      */
     public close(reason: number): void {
-        console.debug(this.logTag, 'Closing connection:', saltyrtcClient.explainCloseCode(reason));
+        this.debug('Closing connection:', saltyrtcClient.explainCloseCode(reason));
     }
 
     /**
@@ -188,7 +206,7 @@ export class RelayedDataTask implements saltyrtc.tasks.relayed_data.RelayedDataT
      * Emit an event.
      */
     private emit(event: saltyrtc.SaltyRTCEvent) {
-        console.debug(this.logTag, 'New event:', event.type);
+        this.debug('New event:', event.type);
         const handlers = this.eventRegistry.get(event.type);
         for (let handler of handlers) {
             try {

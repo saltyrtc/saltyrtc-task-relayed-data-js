@@ -27,6 +27,10 @@ Create a new task instance:
 
     const task = new RelayedDataTask();
 
+(If you want to enable debug console messages, you can pass `true` to the constructor:)
+
+    const task = new RelayedDataTask(true);
+
 Once the connection is established (when the `SaltyRTC` instance raises the
 `state-change:task` event), you can send messages using the `sendMessage` method:
 

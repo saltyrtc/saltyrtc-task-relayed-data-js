@@ -20,7 +20,7 @@ export default () => { describe('Integration Tests', function() {
         this.initiator = new saltyrtcClient.SaltyRTCBuilder()
             .connectTo(Config.SALTYRTC_HOST, Config.SALTYRTC_PORT)
             .withKeyStore(new saltyrtcClient.KeyStore())
-            .usingTasks([new RelayedDataTask()])
+            .usingTasks([new RelayedDataTask(true)])
             .asInitiator();
 
         let pubKey = this.initiator.permanentKeyBytes;
@@ -29,7 +29,7 @@ export default () => { describe('Integration Tests', function() {
             .connectTo(Config.SALTYRTC_HOST, Config.SALTYRTC_PORT)
             .withKeyStore(new saltyrtcClient.KeyStore())
             .initiatorInfo(pubKey, authToken)
-            .usingTasks([new RelayedDataTask()])
+            .usingTasks([new RelayedDataTask(true)])
             .asResponder();
 
         // Helper function. Connect both clients and resolve once they both finished the peer handshake.
