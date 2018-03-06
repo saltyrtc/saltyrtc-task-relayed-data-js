@@ -5,6 +5,7 @@
   "main": "dist/saltyrtc-task-relayed-data.es5.min.js",
   "module": "dist/saltyrtc-task-relayed-data.es2015.js",
   "jsnext:main": "dist/saltyrtc-task-relayed-data.es2015.js",
+  "typings": "saltyrtc-task-relayed-data.d.ts",
   "types": "saltyrtc-task-relayed-data.d.ts",
   "scripts": {
     "test": "karma start --single-run --log-level=debug --colors",
