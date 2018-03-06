@@ -69,6 +69,19 @@ export default () => { describe('Integration Tests', function() {
             done();
         });
 
+        spec = it('connect (both)', async (done) => {
+            console.info('===> TEST NAME:', spec.getFullName());
+            expect(this.initiator.state).toEqual('new');
+            expect(this.responder.state).toEqual('new');
+
+            await this.connectBoth(this.initiator, this.responder);
+
+            expect(this.initiator.state).toBe('task');
+            expect(this.responder.state).toBe('task');
+
+            done();
+        });
+
     });
 
 }); }
