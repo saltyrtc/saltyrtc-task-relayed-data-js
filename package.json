@@ -7,6 +7,7 @@
   "jsnext:main": "dist/saltyrtc-task-relayed-data.es2015.js",
   "types": "saltyrtc-task-relayed-data.d.ts",
   "scripts": {
+    "test": "karma start --single-run --log-level=debug --colors",
     "build": "webpack --mode development --config webpack.dev.js",
     "build_tests": "webpack --mode development --config webpack.tests.js",
     "dist": "webpack --mode production --config webpack.prod.js",
@@ -40,6 +41,10 @@
     "@types/jasmine": "^2.8.6",
     "clean-webpack-plugin": "^0.1.18",
     "jasmine": "^3.1.0",
+    "karma": "^2.0.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-firefox-launcher": "^1.1.0",
+    "karma-jasmine": "^1.1.1",
     "msgpack-lite": "^0.1.26",
     "ts-loader": "^4.0.0",
     "tweetnacl": "^1.0.0",
