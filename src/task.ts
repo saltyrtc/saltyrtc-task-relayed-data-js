@@ -121,6 +121,8 @@ export class RelayedDataTask implements saltyrtc.tasks.relayed_data.RelayedDataT
      * This method should only be called by the signaling class, not by the end user!
      */
     getSupportedMessageTypes(): string[] {
+        // Only return data message. The 'close' message is already handled
+        // by the `@saltyrtc/client` library.
         return [RelayedDataTask.TYPE_DATA];
     }
 
