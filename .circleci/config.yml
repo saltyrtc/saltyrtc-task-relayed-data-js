@@ -30,7 +30,7 @@ references:
     # Run tests
     - run:
         name: Run tests
-        command: npm run build_tests && npm test
+        command: npm run build_tests && npm test -- --browsers $BROWSER
     - run:
         name: Run type checks
         command: node_modules/.bin/tsc --noEmit
