@@ -1,8 +1,6 @@
 version: 2
 
 references:
-  test-docker: &test-docker
-
   test-steps: &test-steps
     - checkout
     - restore_cache:
@@ -34,9 +32,6 @@ references:
     - run:
         name: Run type checks
         command: node_modules/.bin/tsc --noEmit
-    - run:
-        name: Run linter
-        command: npm run lint
 
     # Stop SaltyRTC server
     # Commented out, use server.saltyrtc.org for now
@@ -65,6 +60,23 @@ jobs:
     steps: *test-steps
     environment:
       - BROWSER: ChromiumHeadless
+  lint:
+    docker:
+     - image: saltyrtc/circleci-image-js:chromium-latest
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
+      - run: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run:
+          name: Run linter
+          command: npm run lint
 
 workflows:
   version: 2
@@ -73,3 +85,4 @@ workflows:
       - test-firefox-52.6.0esr
       - test-firefox-58.0.2
       - test-chromium-latest
+      - lint
