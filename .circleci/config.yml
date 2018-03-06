@@ -21,6 +21,11 @@ references:
     # Start SaltyRTC server
     - run: saltyrtc-server-launcher > /saltyrtc/server.pid && sleep 2
 
+    # Show browser version
+    - run: if which firefox >/dev/null; then firefox --version; fi
+    - run: if which chrome >/dev/null; then chrome --version; fi
+    - run: if which chromium >/dev/null; then chromium --version; fi
+
     # Run tests
     - run:
         name: Run tests
