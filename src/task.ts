@@ -79,7 +79,7 @@ export class RelayedDataTask implements saltyrtc.tasks.relayed_data.RelayedDataT
      *
      * This method should only be called by the signaling class, not by the end user!
      */
-    init(signaling: saltyrtc.Signaling, data: Object): void {
+    public init(signaling: saltyrtc.Signaling, data: object): void {
         this.debug('init');
         this.signaling = signaling;
         this.initialized = true;
@@ -90,7 +90,7 @@ export class RelayedDataTask implements saltyrtc.tasks.relayed_data.RelayedDataT
      *
      * This method should only be called by the signaling class, not by the end user!
      */
-    onPeerHandshakeDone(): void {
+    public onPeerHandshakeDone(): void {
         this.debug('onPeerHandshakeDone');
     }
 
@@ -99,11 +99,13 @@ export class RelayedDataTask implements saltyrtc.tasks.relayed_data.RelayedDataT
      *
      * This method should only be called by the signaling class, not by the end user!
      */
-    onTaskMessage(message: saltyrtc.messages.TaskMessage): void {
+    public onTaskMessage(message: saltyrtc.messages.TaskMessage): void {
         this.debug('New task message arrived: ' + message.type);
         switch (message.type) {
             case RelayedDataTask.TYPE_DATA:
-                if (this.validateData(message) !== true) return;
+                if (this.validateData(message) !== true) {
+                    return;
+                }
                 this.emit({type: RelayedDataTask.EVENT_DATA, data: message[RelayedDataTask.KEY_PAYLOAD]});
                 break;
             default:
@@ -119,11 +121,11 @@ export class RelayedDataTask implements saltyrtc.tasks.relayed_data.RelayedDataT
      * @param payload Non-encrypted message
      * @throws SignalingError always
      */
-    sendSignalingMessage(payload: Uint8Array) {
+    public sendSignalingMessage(payload: Uint8Array) {
         throw new saltyrtcClient.SignalingError(
             saltyrtcClient.CloseCode.ProtocolError,
-            "sendSignalingMessage called even though task does not implement handover"
-        )
+            'sendSignalingMessage called even though task does not implement handover',
+        );
     }
 
     /**
@@ -138,7 +140,7 @@ export class RelayedDataTask implements saltyrtc.tasks.relayed_data.RelayedDataT
      *
      * This method should only be called by the signaling class, not by the end user!
      */
-    getSupportedMessageTypes(): string[] {
+    public getSupportedMessageTypes(): string[] {
         // Only return data message. The 'close' message is already handled
         // by the `@saltyrtc/client` library.
         return [RelayedDataTask.TYPE_DATA];
@@ -149,7 +151,7 @@ export class RelayedDataTask implements saltyrtc.tasks.relayed_data.RelayedDataT
      *
      * This method should only be called by the signaling class, not by the end user!
      */
-    getData(): object {
+    public getData(): object {
         return {};
     }
 
@@ -208,7 +210,7 @@ export class RelayedDataTask implements saltyrtc.tasks.relayed_data.RelayedDataT
     private emit(event: saltyrtc.SaltyRTCEvent) {
         this.debug('New event:', event.type);
         const handlers = this.eventRegistry.get(event.type);
-        for (let handler of handlers) {
+        for (const handler of handlers) {
             try {
                 this.callHandler(handler, event);
             } catch (e) {

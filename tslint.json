@@ -1,0 +1,15 @@
+{
+    "extends": "tslint:recommended",
+    "rules": {
+        "file-header": [true, "Copyright \\(C\\)"],
+        "interface-name": [true, "never-prefix"],
+        "max-classes-per-file": false,
+        "member-ordering": false,
+        "object-literal-shorthand": false,
+        "object-literal-sort-keys": false,
+        "only-arrow-functions": false,
+        "quotemark": [true, "single", "avoid-escape"],
+        "indent": [true, "spaces"],
+        "whitespace": [true, "check-branch", "check-decl", "check-operator", "check-separator", "check-rest-spread", "check-type", "check-typecast", "check-type-operator", "check-preblock"]
+    }
+}

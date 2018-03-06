@@ -5,4 +5,4 @@
  * of the MIT license.  See the `LICENSE.md` file for details.
  */
 
-export {RelayedDataTask} from "./task";
+export {RelayedDataTask} from './task';

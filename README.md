@@ -8,9 +8,6 @@
 This is a [SaltyRTC](https://saltyrtc.org/) Relayed Data task implementation for
 JavaScript (ES5 / ES2015), written in TypeScript 2.
 
-**Warning: This is beta software. Use at your own risk. Testing and review is
-welcome!**
-
 
 ## Installing
 
@@ -47,6 +44,24 @@ and deregister event handlers with the `on`, `once` and `off` methods:
 The following events are available:
 
 * `data`: A new message from the peer was received.
+
+
+## Testing
+
+To run tests:
+
+    npm run build_tests
+
+Then open `tests/testsuite.html` in your browser.
+
+To run linting checks:
+
+    npm run lint
+
+You can also install a pre-push hook to do the linting:
+
+    echo -e '#!/bin/sh\nnpm run lint' > .git/hooks/pre-push
+    chmod +x .git/hooks/pre-push
 
 
 ## Security
