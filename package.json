@@ -2,9 +2,9 @@
   "name": "@saltyrtc/task-relayed-data",
   "version": "0.1.0",
   "description": "A SaltyRTC Relayed Data task implementation.",
-  "main": "dist/saltyrtc-task-relayed-data.es5.min.js",
-  "module": "dist/saltyrtc-task-relayed-data.es2015.js",
-  "jsnext:main": "dist/saltyrtc-task-relayed-data.es2015.js",
+  "main": "dist/bundle.js",
+  "module": "dist/bundle.js",
+  "jsnext:main": "dist/bundle.js",
   "typings": "saltyrtc-task-relayed-data.d.ts",
   "types": "saltyrtc-task-relayed-data.d.ts",
   "scripts": {
@@ -55,5 +55,14 @@
     "webpack": "^4.0.1",
     "webpack-cli": "^2.0.9",
     "webpack-merge": "^4.1.2"
-  }
+  },
+  "files": [
+    "dist",
+    "saltyrtc-task-relayed-data.d.ts",
+    "README.md",
+    "LICENSE.md",
+    "CHANGELOG.md",
+    "package.json",
+    "package-lock.json"
+  ]
 }
