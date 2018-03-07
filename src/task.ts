@@ -13,7 +13,7 @@
 export class RelayedDataTask implements saltyrtc.tasks.relayed_data.RelayedDataTask {
 
     // Constants
-    private static PROTOCOL_NAME = 'v0.relayed_data.tasks.saltyrtc.org';
+    private static PROTOCOL_NAME = 'v0.relayed-data.tasks.saltyrtc.org';
     private static TYPE_DATA = 'data';
     private static KEY_PAYLOAD = 'p';
     private static EVENT_DATA = 'data';
