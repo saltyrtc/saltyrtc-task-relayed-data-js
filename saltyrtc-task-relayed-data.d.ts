@@ -46,4 +46,12 @@ declare namespace saltyrtc.tasks.relayed_data {
 
     }
 
+    interface RelayedDataTaskStatic {
+        new(debug?: boolean): RelayedDataTask;
+    }
+
+}
+
+declare var saltyrtcTaskRelayedData: {
+    RelayedDataTask: saltyrtc.tasks.relayed_data.RelayedDataTaskStatic,
 }
