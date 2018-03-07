@@ -7,7 +7,9 @@
 
 /// <reference types="jasmine" />
 
-import test_integration from "./integration.spec";
+import '../node_modules/@babel/polyfill/dist/polyfill';
+
+import test_integration from './integration.spec';
 
 let counter = 1;
 beforeEach(() => console.info('------ TEST', counter++, 'BEGIN ------'));
