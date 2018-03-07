@@ -6,7 +6,7 @@ module.exports = function(config) {
             'node_modules/msgpack-lite/dist/msgpack.min.js',
             'node_modules/tweetnacl/nacl-fast.js',
             'node_modules/@saltyrtc/client/dist/saltyrtc-client.es5.js',
-            'dist/testsuite.js',
+            'tests/testsuite.js',
         ],
         customLaunchers: {
             Firefox_circle_ci: {
