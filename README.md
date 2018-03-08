@@ -4,6 +4,7 @@
 [![npm Version](https://img.shields.io/npm/v/@saltyrtc/task-relayed-data.svg?maxAge=2592000)](https://www.npmjs.com/package/@saltyrtc/task-relayed-data)
 [![npm Downloads](https://img.shields.io/npm/dt/@saltyrtc/task-relayed-data.svg?maxAge=3600)](https://www.npmjs.com/package/@saltyrtc/task-relayed-data)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/saltyrtc/saltyrtc-task-relayed-data-js)
+[![Join our chat on Gitter](https://badges.gitter.im/saltyrtc/Lobby.svg)](https://gitter.im/saltyrtc/Lobby)
 
 This is a [SaltyRTC](https://saltyrtc.org/) Relayed Data task implementation for
 JavaScript (ES5 / ES2015), written in TypeScript 2.
