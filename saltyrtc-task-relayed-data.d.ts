@@ -54,4 +54,4 @@ declare namespace saltyrtc.tasks.relayed_data {
 
 declare var saltyrtcTaskRelayedData: {
     RelayedDataTask: saltyrtc.tasks.relayed_data.RelayedDataTaskStatic,
-}
+};
