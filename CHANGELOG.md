@@ -12,6 +12,10 @@ Possible log types:
 - `[security]` to invite users to upgrade in case of vulnerabilities.
 
 
+### v0.2.0 (2018-05-03)
+
+- [changed] Require @saltyrtc/client ^0.11.1
+
 ### v0.1.3 (2018-03-07)
 
 - Initial release
