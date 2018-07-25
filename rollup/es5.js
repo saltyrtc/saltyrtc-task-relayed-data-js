@@ -17,14 +17,7 @@ config.plugins.push(
         presets: [
             ['@babel/preset-env', {
                 modules: false,
-                targets: {
-                    browsers: [
-                        'firefox >= 52',
-                        'chrome >= 58',
-                        'safari >= 10',
-                        'edge >= 15',
-                    ]
-                }
+                forceAllTransforms: true,
             }]
         ],
     })
