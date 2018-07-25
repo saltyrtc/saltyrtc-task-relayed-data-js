@@ -46,9 +46,9 @@ jobs:
     steps: *test-steps
     environment:
       - BROWSER: Firefox_circle_ci
-  test-firefox-58.0.2:
+  test-firefox-61.0.1:
     docker:
-      - image: saltyrtc/circleci-image-js:firefox-58.0.2
+      - image: saltyrtc/circleci-image-js:firefox-61.0.1
         environment:
           FIREFOX_BIN: xvfb-firefox
     steps: *test-steps
@@ -83,6 +83,6 @@ workflows:
   build:
     jobs:
       - test-firefox-52.6.0esr
-      - test-firefox-58.0.2
+      - test-firefox-61.0.1
       - test-chromium-latest
       - lint
