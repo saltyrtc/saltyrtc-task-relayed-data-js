@@ -41,8 +41,10 @@ declare namespace saltyrtc.tasks.relayed_data {
          *
          * If no handler is specified, remove all handlers for the specified
          * event(s).
+         *
+         * If no event name is specified, all event handlers will be cleared.
          */
-        off(event: string | string[], handler?: saltyrtc.SaltyRTCEventHandler): void;
+        off(event?: string | string[], handler?: saltyrtc.SaltyRTCEventHandler): void;
 
     }
 
