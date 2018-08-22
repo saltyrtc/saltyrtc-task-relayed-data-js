@@ -12,6 +12,11 @@ Possible log types:
 - `[security]` to invite users to upgrade in case of vulnerabilities.
 
 
+### v0.3.1 (2018-08-22)
+
+- [added] Allow deregistering all event handlers (#3)
+- [changed] Upgrade npm dependencies
+
 ### v0.3.0 (2018-07-25)
 
 - [changed] Require @saltyrtc/client ^0.12

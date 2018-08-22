@@ -1,6 +1,6 @@
 {
   "name": "@saltyrtc/task-relayed-data",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A SaltyRTC Relayed Data task implementation.",
   "main": "dist/saltyrtc-task-relayed-data.es5.min.js",
   "module": "dist/saltyrtc-task-relayed-data.es2015.js",
