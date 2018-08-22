@@ -197,8 +197,10 @@ export class RelayedDataTask implements saltyrtc.tasks.relayed_data.RelayedDataT
      *
      * If no handler is specified, remove all handlers for the specified
      * event(s).
+     *
+     * If no event name is specified, all event handlers will be cleared.
      */
-    public off(event: string | string[], handler?: saltyrtc.SaltyRTCEventHandler): void {
+    public off(event?: string | string[], handler?: saltyrtc.SaltyRTCEventHandler): void {
         this.eventRegistry.unregister(event, handler);
     }
 
