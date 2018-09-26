@@ -35,14 +35,14 @@
   "homepage": "https://github.com/saltyrtc/saltyrtc-task-relayed-data-js#readme",
   "dependencies": {},
   "peerDependencies": {
-    "@saltyrtc/client": "^0.12.4",
+    "@saltyrtc/client": "git://github.com/saltyrtc/saltyrtc-client-js.git#buffered-amount",
     "tweetnacl": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-rc.2",
     "@babel/polyfill": "^7.0.0-rc.2",
     "@babel/preset-env": "^7.0.0-rc.2",
-    "@saltyrtc/client": "^0.12.4",
+    "@saltyrtc/client": "git://github.com/saltyrtc/saltyrtc-client-js.git#buffered-amount",
     "@types/jasmine": "^2.8.8",
     "jasmine": "^3.2.0",
     "karma": "^3.0.0",

@@ -63,6 +63,14 @@ export class RelayedDataTask implements saltyrtc.tasks.relayed_data.RelayedDataT
     }
 
     /**
+     * Return the currently buffered amount of bytes on the WebSocket
+     * transport or `0` in case there is no WebSocket transport.
+     */
+    public get bufferedAmount(): number {
+        return this.signaling.bufferedAmount;
+    }
+
+    /**
      * Send an end-to-end encrypted message through the WebSocket.
      */
     public sendMessage(data: any): void {

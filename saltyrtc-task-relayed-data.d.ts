@@ -10,6 +10,12 @@ declare namespace saltyrtc.tasks.relayed_data {
     interface RelayedDataTask extends saltyrtc.Task {
 
         /**
+         * Return the currently buffered amount of bytes on the WebSocket
+         * transport or `0` in case there is no WebSocket transport.
+         */
+        readonly bufferedAmount: number;
+
+        /**
          * Send an end-to-end encrypted message through the WebSocket.
          */
         sendMessage(data: any): void;
