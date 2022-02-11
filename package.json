@@ -43,7 +43,7 @@
     "@babel/preset-env": "^7.0.0-rc.2",
     "@saltyrtc/client": "^0.12.4",
     "@types/jasmine": "^2.8.8",
-    "jasmine": "3.99",
+    "jasmine-core": "^4.0.0",
     "karma": "^3.0.0",
     "karma-chrome-launcher": "^2.2.0",
     "karma-firefox-launcher": "^1.1.0",
