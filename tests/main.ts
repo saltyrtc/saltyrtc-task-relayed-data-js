@@ -8,8 +8,6 @@
 
 /// <reference types="jasmine" />
 
-import '../node_modules/@babel/polyfill/dist/polyfill';
-
 import test_integration from './integration.spec';
 
 let counter = 1;

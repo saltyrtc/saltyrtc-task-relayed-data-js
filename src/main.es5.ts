@@ -5,5 +5,4 @@
  * of the MIT license.  See the `LICENSE.md` file for details.
  */
 
-import '../node_modules/@babel/polyfill/dist/polyfill'; // Include ES5 polyfills
 export {RelayedDataTask} from './task';
