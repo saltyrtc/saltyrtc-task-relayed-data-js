@@ -38,9 +38,9 @@
     "tweetnacl": "^1.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0-rc.2",
+    "@babel/core": "^7.17.2",
     "@babel/polyfill": "^7.0.0-rc.2",
-    "@babel/preset-env": "^7.0.0-rc.2",
+    "@babel/preset-env": "^7.16.11",
     "@saltyrtc/client": "^0.12.4",
     "@types/jasmine": "^2.8.8",
     "jasmine-core": "^4.0.0",
@@ -50,7 +50,7 @@
     "karma-jasmine": "^1.1.2",
     "msgpack-lite": "^0.1.26",
     "rollup": "^2.67.2",
-    "rollup-plugin-babel": "^4.0.0-beta.8",
+    "rollup-plugin-babel": "4.4",
     "rollup-plugin-typescript": "^1.0.1",
     "rollup-plugin-uglify": "^4.0.0",
     "ts-loader": "^4.5",
