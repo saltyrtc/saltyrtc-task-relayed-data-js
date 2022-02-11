@@ -6,11 +6,13 @@
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the `LICENSE.md` file for details.
  */
-import {Config} from "./config";
-import {sleep} from "./utils";
-import {RelayedDataTask} from "../src/task";
+// tslint:disable:no-console
 
-/// <reference types="jasmine" />
+import {Config} from './config';
+import {sleep} from './utils';
+import {RelayedDataTask} from '../src/task';
+
+/// <reference types='jasmine' />
 
 let spec: any;
 
@@ -27,8 +29,8 @@ export default () => { describe('Integration Tests', function() {
             .usingTasks([new RelayedDataTask(true)])
             .asInitiator();
 
-        let pubKey = initiator.permanentKeyBytes;
-        let authToken = initiator.authTokenBytes;
+        const pubKey = initiator.permanentKeyBytes;
+        const authToken = initiator.authTokenBytes;
         responder = new saltyrtcClient.SaltyRTCBuilder()
             .connectTo(Config.SALTYRTC_HOST, Config.SALTYRTC_PORT)
             .withKeyStore(new saltyrtcClient.KeyStore())
@@ -40,7 +42,7 @@ export default () => { describe('Integration Tests', function() {
         connectBoth = (a: saltyrtc.SaltyRTC, b: saltyrtc.SaltyRTC) => {
             let ready = 0;
             return new Promise<void>((resolve) => {
-                const handler = () => { if (++ready == 2) resolve() };
+                const handler = () => { if (++ready === 2) resolve() };
                 a.once('state-change:task', handler);
                 b.once('state-change:task', handler);
                 a.connect();
@@ -95,7 +97,7 @@ export default () => { describe('Integration Tests', function() {
             const initiatorTask: RelayedDataTask = initiator.getTask() as RelayedDataTask;
             const responderTask: RelayedDataTask = responder.getTask() as RelayedDataTask;
 
-            const exchangedData = new Promise((resolve) => {
+            const exchangedData = new Promise<void>((resolve) => {
                 // When the responder receives a message, reply with another message.
                 responderTask.on('data', (ev: saltyrtc.SaltyRTCEvent) => {
                     expect(ev.data).toEqual('initiator->responder');
