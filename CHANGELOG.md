@@ -12,6 +12,10 @@ Possible log types:
 - `[security]` to invite users to upgrade in case of vulnerabilities.
 
 
+### v0.4.0 (2022-02-11)
+
+- [changed] Upgrade npm dependencies
+
 ### v0.3.1 (2018-08-22)
 
 - [added] Allow deregistering all event handlers (#3)
