@@ -1,7 +1,7 @@
 /**
  * Integration tests.
  *
- * Copyright (C) 2018 Threema GmbH
+ * Copyright (C) 2018-2022 Threema GmbH
  *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the `LICENSE.md` file for details.
@@ -16,16 +16,20 @@ let spec: any;
 
 export default () => { describe('Integration Tests', function() {
 
+    let initiator: saltyrtc.SaltyRTC;
+    let responder: saltyrtc.SaltyRTC;
+    let connectBoth: (a: saltyrtc.SaltyRTC, b: saltyrtc.SaltyRTC) => Promise<void>;
+
     beforeEach(() => {
-        this.initiator = new saltyrtcClient.SaltyRTCBuilder()
+        initiator = new saltyrtcClient.SaltyRTCBuilder()
             .connectTo(Config.SALTYRTC_HOST, Config.SALTYRTC_PORT)
             .withKeyStore(new saltyrtcClient.KeyStore())
             .usingTasks([new RelayedDataTask(true)])
             .asInitiator();
 
-        let pubKey = this.initiator.permanentKeyBytes;
-        let authToken = this.initiator.authTokenBytes;
-        this.responder = new saltyrtcClient.SaltyRTCBuilder()
+        let pubKey = initiator.permanentKeyBytes;
+        let authToken = initiator.authTokenBytes;
+        responder = new saltyrtcClient.SaltyRTCBuilder()
             .connectTo(Config.SALTYRTC_HOST, Config.SALTYRTC_PORT)
             .withKeyStore(new saltyrtcClient.KeyStore())
             .initiatorInfo(pubKey, authToken)
@@ -33,9 +37,9 @@ export default () => { describe('Integration Tests', function() {
             .asResponder();
 
         // Helper function. Connect both clients and resolve once they both finished the peer handshake.
-        this.connectBoth = (a: saltyrtc.SaltyRTC, b: saltyrtc.SaltyRTC) => {
+        connectBoth = (a: saltyrtc.SaltyRTC, b: saltyrtc.SaltyRTC) => {
             let ready = 0;
-            return new Promise((resolve) => {
+            return new Promise<void>((resolve) => {
                 const handler = () => { if (++ready == 2) resolve() };
                 a.once('state-change:task', handler);
                 b.once('state-change:task', handler);
@@ -47,53 +51,49 @@ export default () => { describe('Integration Tests', function() {
 
     describe('Relayed Data Task', () => {
 
-        spec = it('connect (initiator first)', async (done) => {
+        spec = it('connect (initiator first)', async () => {
             console.info('===> TEST NAME:', spec.getFullName());
-            expect(this.initiator.state).toEqual('new');
-            expect(this.responder.state).toEqual('new');
+            expect(initiator.state).toEqual('new');
+            expect(responder.state).toEqual('new');
 
-            this.initiator.connect();
-            expect(this.initiator.state).toEqual('ws-connecting');
+            initiator.connect();
+            expect(initiator.state).toEqual('ws-connecting');
 
             await sleep(1000);
-            expect(this.initiator.state === 'server-handshake' ||
-                this.initiator.state === 'peer-handshake').toBe(true);
+            expect(initiator.state === 'server-handshake' ||
+                initiator.state === 'peer-handshake').toBe(true);
 
-            this.responder.connect();
-            expect(this.responder.state).toEqual('ws-connecting');
+            responder.connect();
+            expect(responder.state).toEqual('ws-connecting');
 
             await sleep(1000);
-            expect(this.initiator.state).toBe('task');
-            expect(this.responder.state).toBe('task');
-
-            done();
+            expect(initiator.state).toBe('task');
+            expect(responder.state).toBe('task');
         });
 
-        spec = it('connect (both)', async (done) => {
+        spec = it('connect (both)', async () => {
             console.info('===> TEST NAME:', spec.getFullName());
-            expect(this.initiator.state).toEqual('new');
-            expect(this.responder.state).toEqual('new');
+            expect(initiator.state).toEqual('new');
+            expect(responder.state).toEqual('new');
 
-            await this.connectBoth(this.initiator, this.responder);
+            await connectBoth(initiator, responder);
 
-            expect(this.initiator.state).toBe('task');
-            expect(this.responder.state).toBe('task');
-
-            done();
+            expect(initiator.state).toBe('task');
+            expect(responder.state).toBe('task');
         });
 
-        spec = it('exchange data', async (done) => {
+        spec = it('exchange data', async () => {
             console.info('===> TEST NAME:', spec.getFullName());
-            expect(this.initiator.state).toEqual('new');
-            expect(this.responder.state).toEqual('new');
+            expect(initiator.state).toEqual('new');
+            expect(responder.state).toEqual('new');
 
-            await this.connectBoth(this.initiator, this.responder);
+            await connectBoth(initiator, responder);
 
-            expect(this.initiator.state).toBe('task');
-            expect(this.responder.state).toBe('task');
+            expect(initiator.state).toBe('task');
+            expect(responder.state).toBe('task');
 
-            const initiatorTask: RelayedDataTask = this.initiator.getTask();
-            const responderTask: RelayedDataTask = this.responder.getTask();
+            const initiatorTask: RelayedDataTask = initiator.getTask() as RelayedDataTask;
+            const responderTask: RelayedDataTask = responder.getTask() as RelayedDataTask;
 
             const exchangedData = new Promise((resolve) => {
                 // When the responder receives a message, reply with another message.
@@ -119,7 +119,6 @@ export default () => { describe('Integration Tests', function() {
             });
 
             await exchangedData;
-            done();
         });
 
     });
