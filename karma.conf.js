@@ -17,7 +17,6 @@ module.exports = function(config) {
         browserNoActivityTimeout: 30000 // ms, default: 10'000
     };
 
-    // noinspection JSUnresolvedVariable
     if (process.env.CIRCLECI) {
         configuration.browsers = ['ChromiumHeadless', 'Firefox_circle_ci'];
     } else {
@@ -25,5 +24,4 @@ module.exports = function(config) {
     }
 
     config.set(configuration);
-
 };
