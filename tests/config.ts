@@ -1,4 +1,4 @@
 export class Config {
-    public static SALTYRTC_HOST = 'server.saltyrtc.org';
-    public static SALTYRTC_PORT = 9287;
+    public static SALTYRTC_HOST = 'localhost';
+    public static SALTYRTC_PORT = 8765;
 }
